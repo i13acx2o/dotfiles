@@ -1,0 +1,13 @@
+#!/bin/sh
+
+alias vi='nvim'
+alias cat='bat'
+
+alias ls='eza -l --group-directories-first'
+alias ll='eza -la --group-directories-first'
+alias ltr='eza -T --group-directories-first'
+
+alias date="date +'%a %b %d | %R %:::z'"
+
+alias ..="cd .."
+alias ...="cd ../.."

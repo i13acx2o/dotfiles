@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# Load Hyprland
+[[ $(tty) = "/dev/tty1" ]] && hyprland

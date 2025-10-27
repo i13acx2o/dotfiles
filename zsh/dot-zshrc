@@ -1,0 +1,75 @@
+#!/bin/zsh
+
+# Enable colors and change prompt:
+autoload -U colors && colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+
+setopt autocd           # Automatically cd into typed directory.
+stty stop undef         # Disable ctrl-s to freeze terminal.
+setopt interactive_comments
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=$XDG_CACHE_HOME/zsh/history
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit -d $XDG_CACHE_HOME/zsh/dump
+_comp_options+=(globdots)               # Include hidden files.
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle 
+
+# Load aliasrc
+setopt aliases
+[ -f "$HOME/Data/Misc/dofiles/zsh/alias" ] &&
+    source "$HOME/Data/Misc/dofiles/zsh/alias"
+
+# Load fzf scripts
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+# FZF OPTS
+export FZF_DEFAULT_OPTS="
+  --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
+  --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC
+  --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8
+  --color=selected-bg:#45475A
+  --color=border:#6C7086,label:#CDD6F4
+  --border=rounded
+"
+
+# Enable previews using bat and tree
+export FZF_CTRL_T_OPTS="
+  --walker file,follow
+  --walker-skip .git,node_modules
+  --preview 'bat --line-range :500 {}'
+"
+
+export FZF_ALT_C_OPTS="
+  --walker dir,follow,hidden
+  --walker-skip .git,node_modules
+  --preview 'tree -C {} | head -100'
+"
+
+# Load syntax highlighting; should be last.
+[ -f /usr/local/share/fsh/fast-syntax-highlighting.plugin.zsh ] && source /usr/local/share/fsh/fast-syntax-highlighting.plugin.zsh 2>/dev/null
