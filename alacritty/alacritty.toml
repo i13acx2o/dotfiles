@@ -1,0 +1,27 @@
+
+## Alacritty CONFIG ##
+
+[general]
+import= [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+live_config_reload = true
+
+[window]
+padding = { x = 2, y = 2 }
+dynamic_padding = true
+decorations = "None"
+opacity = 0.9
+
+[scrolling]
+history = 100000
+
+[font]
+normal = {family="JetBrainsMono NFM", style="Regular"}
+bold = {family="JetBrainsMono NFM", style="Bold"}
+italic = {family="JetBrainsMono NFM", style="Italic"}
+bold_italic = {family="JetBrainsMono NFM", style="Bold Italic"}
+size = 14
+
+[mouse]
+hide_when_typing = true
