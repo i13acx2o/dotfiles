@@ -1,0 +1,10 @@
+[mgr]
+sort_by = "alphabetical"
+sort_dir_first = true
+show_symlink = true
+ratio = [0, 1, 3]
+
+[opener]
+open = [
+	{ run = 'imv -f -- "$(dirname "$1")"'},
+]
