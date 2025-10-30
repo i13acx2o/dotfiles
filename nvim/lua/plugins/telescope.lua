@@ -44,7 +44,7 @@ return {
 
     {
       -- List buffers
-      "//",
+      ";b",
       function()
         require("telescope.builtin").buffers()
       end,
