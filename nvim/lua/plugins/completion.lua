@@ -35,7 +35,7 @@ return {
 
       formatting = {
         format = require("lspkind").cmp_format({
-          mode = "symbol_text",
+          mode = "text",
           menu = {
             nvim_lsp = "[LSP]",
             path = "[Path]",
