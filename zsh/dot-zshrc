@@ -41,8 +41,8 @@ autoload edit-command-line; zle
 
 # Load aliasrc
 setopt aliases
-[ -f "$HOME/Data/Misc/dofiles/zsh/alias" ] &&
-    source "$HOME/Data/Misc/dofiles/zsh/alias"
+[ -f "$HOME/Data/Misc/dotfiles/zsh/alias" ] &&
+    source "$HOME/Data/Misc/dotfiles/zsh/alias"
 
 # Load fzf scripts
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
