@@ -4,6 +4,9 @@ return {
     "supermaven-inc/supermaven-nvim",
     event = "InsertEnter",
     config = true,
+    keys = {
+      { ";ai", "<cmd>SupermavenToggle<cr>", desc = "Supermaven: Toggle" },
+    },
   },
 
   -- Terminal
