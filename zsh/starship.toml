@@ -1,0 +1,65 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+palette = "catppuccin_mocha"
+
+format = """
+[┏━━━━━━━━━━━━━━](blue) $time
+[┃](blue) $username$hostname
+[┃](blue) $directory$git_branch
+[┗━━](blue)$character
+"""
+
+[character]
+success_symbol = "[ ](blue)"
+error_symbol   = "[ ](red)"
+vimcmd_symbol  = "[ ](blue)"
+
+[git_branch]
+format = "[ $branch](bold lavender)"
+
+[directory]
+read_only = "󰌾 "
+format = "[$path $read_only](maroon)"
+
+[username]
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style)[@](green)"
+show_always = true
+disabled = false
+
+[hostname]
+ssh_only = false
+format = "[$hostname](bold blue)"
+
+[time]
+format = "[$time](rosewater)"
+time_format = "%H:%M"
+disabled = false
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

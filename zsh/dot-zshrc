@@ -1,0 +1,119 @@
+#!/bin/zsh
+
+#
+# Shell behavior
+setopt autocd
+setopt nobeep
+setopt interactive_comments
+setopt numeric_glob_sort
+
+# Disable ctrl-s to freeze terminal.
+stty stop undef
+
+#
+# History
+[ ! -d "$XDG_STATE_HOME/zsh" ] && mkdir -p $XDG_STATE_HOME/zsh
+HISTFILE=$XDG_STATE_HOME/zsh/history
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+#
+# Zinit
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Load starship
+zinit ice as"command" from"gh-r" \
+	atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+	atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-completions
+
+zinit light zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+zinit light zsh-users/zsh-autosuggestions
+bindkey '^\' autosuggest-toggle
+
+zinit light Aloxaf/fzf-tab
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::brew
+
+# Load completions
+[ ! -d "$XDG_CACHE_HOME/zsh" ] && mkdir -p $XDG_CACHE_HOME/zsh
+autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zinit cdreplay -q
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Edit line in vim with ctrl-e:
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+#
+# FZF
+source <(fzf --zsh)
+# FZF OPTS
+export FZF_DEFAULT_OPTS="
+  --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
+  --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC
+  --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8
+  --color=selected-bg:#45475A
+  --color=border:#6C7086,label:#CDD6F4
+  --border=rounded
+"
+
+# Enable previews using bat and tree
+export FZF_CTRL_T_OPTS="
+  --walker file,follow
+  --walker-skip .git,node_modules
+  --preview 'bat --line-range :500 {}'
+"
+export FZF_ALT_C_OPTS="
+  --walker dir,follow,hidden
+  --walker-skip .git,node_modules
+  --preview 'tree -C {} | head -100'
+"
+
+# Yazi function for cd
+function ycd() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd <"$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+#
+# Load aliasrc
+setopt aliases
+als="$HOME/workspace/misc/dotfiles/zsh/alias"
+[ -f "$als" ] && source "$als"
