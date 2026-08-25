@@ -1,0 +1,21 @@
+# vim: set ft=ghostty:
+# This is the configuration file for ghostty.
+
+theme = Catppuccin Mocha
+font-size = 20
+font-family = "UbuntuMono Nerd Font"
+font-feature = -calt, -liga, -dlig
+background-opacity = 0.9
+
+mouse-hide-while-typing = true
+background-blur = true
+
+window-decoration = none
+window-padding-x = 6
+window-padding-y = 6
+window-padding-balance = true
+
+scrollbar = never
+
+working-directory = ~/workspace
+window-inherit-working-directory = true
