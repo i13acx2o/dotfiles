@@ -117,6 +117,9 @@ function ycd() {
 	rm -f -- "$tmp"
 }
 
+# Zoxide
+eval "$(zoxide init zsh)"
+
 #
 # Load aliasrc
 setopt aliases
