@@ -115,5 +115,4 @@ function ycd() {
 #
 # Load aliasrc
 setopt aliases
-als="$HOME/workspace/misc/dotfiles/zsh/alias"
-[ -f "$als" ] && source "$als"
+[ -f "$ZDOTDIR/aliasrc" ] && source "$ZDOTDIR/aliasrc"
