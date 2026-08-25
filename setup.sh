@@ -22,3 +22,18 @@ ln -s $src/zsh/alias $HOME/.config/zsh/aliasrc
 # Create required DIRs
 [ ! -d "$HOME/.local/state/zsh" ] && mkdir -p "$HOME/.local/state/zsh"
 [ ! -d "$HOME/.cache/zsh" ] && mkdir -p "$HOME/.cache/zsh"
+
+# Link ghostty
+ln -s $src/ghostty $HOME/.config/ghostty
+
+# Link nvim
+ln -s $src/nvim $HOME/.config/nvim
+
+# Link exa
+ln -s $src/exa $HOME/.config/exa
+
+# Link bat
+ln -s $src/bat $HOME/.config/bat
+
+# Link yazi
+ln -s $src/yazi $HOME/.config/yazi
