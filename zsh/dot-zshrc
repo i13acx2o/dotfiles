@@ -56,7 +56,11 @@ zinit light zsh-users/zsh-autosuggestions
 bindkey '^\' autosuggest-toggle
 
 zinit light Aloxaf/fzf-tab
+
+theme="https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-mocha.ini"
+zinit ice atclone"mkdir -p themes && curl -sL -o themes/catppuccin-mocha.ini $theme" atpull"%atclone"
 zinit light zdharma-continuum/fast-syntax-highlighting
+fast-theme -s | grep -q catppuccin || fast-theme catppuccin-mocha
 
 # Add in snippets
 zinit snippet OMZP::git
