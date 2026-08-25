@@ -54,6 +54,7 @@ bindkey '^[[B' history-substring-search-down
 
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^\' autosuggest-toggle
+bindkey '^y' autosuggest-accept
 
 zinit light Aloxaf/fzf-tab
 
