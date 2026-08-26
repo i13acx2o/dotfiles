@@ -30,7 +30,7 @@ ln -s $src/ghostty $HOME/.config/ghostty
 ln -s $src/nvim $HOME/.config/nvim
 
 # Link exa
-ln -s $src/exa $HOME/.config/exa
+ln -s $src/eza $HOME/.config/eza
 
 # Link bat
 ln -s $src/bat $HOME/.config/bat
