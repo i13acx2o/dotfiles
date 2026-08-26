@@ -14,9 +14,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 
 # Golang
-[ -d "$XDG_DATA_HOME/go" ] && export GOPATH="$XDG_DATA_HOME/go"
+export GOPATH="$XDG_DATA_HOME/go"
 
 # Rust
-[ -d "$XDG_DATA_HOME/cargo" ] && export CARGO_HOME="$XDG_DATA_HOME/cargo"
-[ -d "$XDG_DATA_HOME/rustup" ] && export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 [ -f "$XDG_DATA_HOME/cargo/env" ] && source "$XDG_DATA_HOME/cargo/env"
